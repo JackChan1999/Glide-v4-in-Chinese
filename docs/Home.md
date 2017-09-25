@@ -11,11 +11,12 @@ Glide的主要重点是尽可能平滑和快速地滚动任何类型的图像列
 ## API
 
 Glide使用简单流畅的API，允许用户在一行中提出大多数请求：
+
 ```java
 Glide.with(fragment)
     .load(url)
     .into(imageView);
-````
+```
 
 ## 性能
 
