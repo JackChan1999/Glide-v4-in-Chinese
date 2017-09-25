@@ -12,7 +12,7 @@ Glide允许用户指定三种不同的占位符以是适应不同的场景：
 占位符是在请求正在进行时显示的图像。当请求成功完成时，占位符将会被替换为请求的资源。如果从内存中加载所请求的资源，占位符可能永远不会显示。如果请求失败并且未设置错误图像，则占位符会一直显示。同样地，如果请求的URL/Model为空，错误图像跟回调图像都没有设置，占位符也会一直显示。 
 
 使用生成的API：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .placeholder(R.drawable.placeholder)
@@ -21,7 +21,7 @@ GlideApp.with(fragment)
 
 或者：
 
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .placeholder(new ColorDrawable(Color.BLACK))
@@ -32,7 +32,7 @@ GlideApp.with(fragment)
 当请求最终失败的时，会显示错误图像。当请求的URL/Model为空，并且没有设置回调的时候，也会显示错误图像。
 
 使用生成的API：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .error(R.drawable.error)
@@ -41,7 +41,7 @@ GlideApp.with(fragment)
 
 或者：
 
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .error(new ColorDrawable(Color.RED))
@@ -53,7 +53,7 @@ GlideApp.with(fragment)
 当一个请求的URL/Model为空时，会显示回调图像。回调图像的主要目的是允许用户表明参数是否允许为空。例如，用户信息网站为空表明用户没有设置配置文件照片。然而，空也可以表明元数据是无效的或者无法获取。默认情况下，Glide认为URL/Model为空是一种错误，用户如果希望自己处理空，应该设置回调图像。
 
 使用生成的API：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .fallback(R.drawable.fallback)
@@ -62,7 +62,7 @@ GlideApp.with(fragment)
 
 或者：
 
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .fallback(new ColorDrawable(Color.GREY))

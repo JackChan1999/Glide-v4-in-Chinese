@@ -39,7 +39,7 @@
 ### 请求监听和自定义日志
 
 如果要以编程的方式跟踪错误日志和成功的负载，请跟踪应用程序中图像占用缓存的比率或者更好的控制本地日志。您可以使用[RequestListener](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/request/RequestListener.html)接口。**RequestListener**可以利用[RequestBuilder#listener()](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/RequestBuilder.html#listener-com.bumptech.glide.request.RequestListener-)添加到一个单独的负载中。例如：
-```
+```java
 Glide.with(fragment)
    .load(url)
    .listener(new RequestListener() {

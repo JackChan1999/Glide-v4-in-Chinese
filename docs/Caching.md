@@ -39,7 +39,7 @@ Glide提供了一些选项，允许您选择在Glide的每次基础请求时怎�
 默认策略是[自动匹配](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/engine/DiskCacheStrategy.html#AUTOMATIC)，尝试为本地或者远程图像使用最优策略。当您加载远程数据（如从URL加载）时，**自动匹配**只会保存负载返回的未修改的原始数据，因为相比调整磁盘数据的尺寸，下载远程数据更加昂贵。对于本地资源，自动匹配只会存储转换缩略图，因为如果您需要生成缩略图尺寸或者类型，检索原始数据花费更少。
 
 应用磁盘缓存策略的例子：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -49,7 +49,7 @@ GlideApp.with(fragment)
 ### 只从缓存中加载
 
 在一些情况下，如果图像不在缓存中，您可能希望加载失败。因此，您可以在每个基础负载中使用[onlyRetrieveFromCache](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/request/RequestOptions.html#onlyRetrieveFromCache-boolean-)方法：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .onlyRetrieveFromCache(true)
@@ -61,7 +61,7 @@ GlideApp.with(fragment)
 ### 跳过缓存
 
 如果您希望确保特定的请求跳过磁盘缓存跟内存缓存，Glide提供了一些替代选择。只是跳过内存缓存，可以使用[skipMemoryCache](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/request/RequestOptions.html#skipMemoryCache-boolean-)：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .skipMemoryCache(true)
@@ -69,7 +69,7 @@ GlideApp.with(fragment)
 ```
 
 只是跳过磁盘缓存，使用[DiskCacheStrategy.NONE](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/engine/DiskCacheStrategy.html#NONE)：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -77,7 +77,7 @@ GlideApp.with(fragment)
 ```
 
 这些选项可以一起使用：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -105,7 +105,7 @@ GlideApp.with(fragment)
 - URL：虽然使URL失效最好的方式是确保服务器改变URL并且URL指代的内容改变时更新客户端。您可以使用[Objectkey](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/signature/ObjectKey.html)添加任意的元数据（如版本号）代替。
 
 将签名传递给负载的例子：
-```
+```java
 GlideApp.with(yourFragment)
     .load(yourFileDataModel)
     .signature(new ObjectKey(yourVersionMetadata))
@@ -114,7 +114,7 @@ GlideApp.with(yourFragment)
 
 媒体存储签名也是媒体存储的简单数据：
 
-```
+```java
 GlideApp.with(fragment)
     .load(mediaStoreUri)
     .signature(new MediaStoreSignature(mimeType, dateModified, orientation))
@@ -122,7 +122,7 @@ GlideApp.with(fragment)
 ```
 
 您可以实现[Key](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/Key.html)接口来定义自己的签名。确保实现了**equals()**，**hashCode()**和**updateDiskCacheKey**方法。
-```
+```java
 public class IntegerVersionSignature implements Key {
     private int currentVersion;
 

@@ -1,0 +1,10 @@
+{ 
+"description": "Glide是Android平台上的一个快速高效的图像加载库，专注于平滑滚动。Glide提供了一个简单易用的API，一个性能可扩展的资源解码管道流和自动资源池。",
+"title" : "Glide v4 中文版",
+"language": "zh-hans",
+"author" : "AllenIverson",
+"gitbook": "3.2.3",
+"pdf": {
+        "fontFamily": "等线"
+    }
+}

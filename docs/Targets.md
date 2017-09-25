@@ -7,7 +7,7 @@ Glide中的目标作为请求跟请求者之间的传递者。目标负责显示
 [into(Target)](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/RequestBuilder.html#into-Y-)方法不仅用于启动每个请求，同时也可以指定将要接收请求结果的目标。Glide提供了一个辅助方法给[into(ImageView)](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/RequestBuilder.html#into-android.widget.ImageView-)，其采用ImageView并把它包装在目标于适合所请求的资源类型。
 
 为了方便使用自定义目标，这些into()方法返回提供给他们的目标：
-```
+```java
 Target<Bitmap> target = Glide.with(fragment)
         .asBitmap()
         .load(url)
@@ -24,7 +24,7 @@ Glide.with(fragment).clear(target);
 ### 自定义目标
 
 重新使用自定义目标的一种简单方法是简单地将其作为实例变量：
-```
+```java
 private class WidgetHolder {
   private final Fragment fragment;
   private final Target<Widget> widgetTarget;
@@ -47,7 +47,7 @@ Glide能够使用getRequest()和setRequest()方法查找和取消对目标的请
 ### ViewTargets
 
 一些自定义的目标还可以提供更智能的getRequest()和setRequest()实现，避免严格要求重新使用目标。例如，ViewTarget使用Android Framework的getTag（）和setTag（）方法：
-```
+```java
 @Override
 public Request getRequest() {
     return (Request) view.getTag();
@@ -60,7 +60,7 @@ public void setRequest(Request request) {
 ```
 
 由于标签是View的属性，因此新加载的ViewTargets可以查找和取消/重新使用先前ViewTargets的请求。因此，当使用into(ImageView)或ViewTarget的子类加载到视图中时，您可以为每个加载传递新的目标：
-```
+```java
 @Override
 public void onBindViewHolder(ViewHolder vh, int position) {
   int resourceId = resourceIds.get(position)
@@ -74,7 +74,7 @@ public void onBindViewHolder(ViewHolder vh, int position) {
 默认情况下，Glide使用由Targets提供的getSize()大小作为请求的目标大小。这样做可以让Glide选择适当的url，downsample，crop和转换适当的图像，以尽量减少内存使用，并确保负载尽可能快。
 
 最简单的实现方式是在getSize()方法中立即调用回调函数：
-```
+```java
 @Override
 public void getSize(SizeReadyCallback cb) {
   cb.onSizeReady(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
@@ -82,7 +82,7 @@ public void getSize(SizeReadyCallback cb) {
 ```
 
 您还可以将尺寸传递给您的Target的构造函数，并将这些尺寸提供给回调：
-```
+```java
 public class CustomTarget<T> implements Target<T> {
   private final int width;
   private final int height;

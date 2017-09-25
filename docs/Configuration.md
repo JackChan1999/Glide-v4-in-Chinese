@@ -10,7 +10,7 @@
 3. 添加Glide注解处理器依赖关系
 
 一个使用OkHttp集成库的Glide例子如下所示：
-```
+```java
 @GlideModule
 public final class OkHttpLibraryGlideModule extends LibraryGlideModule {
   @Override
@@ -21,7 +21,7 @@ public final class OkHttpLibraryGlideModule extends LibraryGlideModule {
 ```
 
 使用[@GlideModule](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/annotation/GlideModule.html)注解需要Glide注解依赖库：
-```
+```gradle
 compile 'com.github.bumptech.glide:annotations:4.0.0-RC1'
 ```
 
@@ -35,7 +35,7 @@ compile 'com.github.bumptech.glide:annotations:4.0.0-RC1'
 5. 为[AppGlideModules](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/module/AppGlideModule.html)添加proguard.cfg的keep
 
 在Glide的[Flickr sample app](https://github.com/bumptech/glide/blob/master/samples/flickr/src/main/java/com/bumptech/glide/samples/flickr/FlickrGlideModule.java)的一个[AppGlideModule](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/module/AppGlideModule.html)例子：
-```
+```java
 @GlideModule
 public class FlickrGlideModule extends AppGlideModule {
   @Override
@@ -46,7 +46,7 @@ public class FlickrGlideModule extends AppGlideModule {
 ```
 
 包含Glide注解处理器要求Glide注解依赖和注解处理器：
-```
+```gradle
 compile 'com.github.bumptech.glide:annotations:4.0.0-RC1'
 annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
 ```
@@ -66,7 +66,7 @@ Glide允许应用程序使用AppGlideModule实现完全控制Glide的内存跟�
 默认情况下，Glide使用[LruResourceCache](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/engine/cache/LruResourceCache.html)，一个内存缓存接口的默认实现使用固定的内存和LRU算法。[LruResourceCache](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/engine/cache/LruResourceCache.html)的大小由Glide的[MemorySizeCalculator](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/engine/cache/MemorySizeCalculator.html)类决定，它可以查看设备内存是否不足以及屏幕的分辨率。
 
 应用程序可以在AppGlideModule类的applyOptions(Context, GlideBuilder)方法中配置MemorySizeCalculator定制化内存缓存的大小。
-```
+```java
 @GlideModule
 public class YourAppGlideModule extends AppGlideModule {
   @Override
@@ -80,7 +80,7 @@ public class YourAppGlideModule extends AppGlideModule {
 ```
 
 应用程序可以直接覆盖缓存大小：
-```
+```java
 @GlideModule
 public class YourAppGlideModule extends AppGlideModule {
   @Override
@@ -92,7 +92,7 @@ public class YourAppGlideModule extends AppGlideModule {
 ```
 
 应用程序可以提供他们自己的内存缓存实现类：
-```
+```java
 @GlideModule
 public class YourAppGlideModule extends AppGlideModule {
   @Override
@@ -107,7 +107,7 @@ public class YourAppGlideModule extends AppGlideModule {
 Glide使用[DiskLruCacheWrapper](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/engine/cache/DiskLruCacheWrapper.html)作为默认的磁盘缓存。DiskLruCacheWrapper是使用LRU算法的固定的磁盘缓存大小。默认的磁盘缓存大小是250MB并且在程序缓存文件夹的特定的目录。
 
 如果显示的媒体文件是公开的，应用可以将位置改变为外部存储（包括没有认证的网站，搜索引擎等等）：
-```
+```java
 @GlideModule
 public class YourAppGlideModule extends AppGlideModule {
   @Override
@@ -118,7 +118,7 @@ public class YourAppGlideModule extends AppGlideModule {
 ```
 
 应用程序可以改变磁盘缓存大小，不管是内部的还是外部的：
-```
+```java
 @GlideModule
 public class YourAppGlideModule extends AppGlideModule {
   @Override
@@ -130,7 +130,7 @@ public class YourAppGlideModule extends AppGlideModule {
 ```
 
 应用程序可以改变外部存储或者内部存储的缓存文件夹的名字：
-```
+```java
 @GlideModule
 public class YourAppGlideModule extends AppGlideModule {
   @Override
@@ -143,7 +143,7 @@ public class YourAppGlideModule extends AppGlideModule {
 ```
 
 应用程序可以选择实现DiskCache接口并提供他们自己的[DiskCache.Factory](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/engine/cache/DiskCache.Factory.html)实例。Glide使用工厂接口在后台线程开启磁盘缓存。缓存可以做I/O操作。例如：检查目标目录的存在没有违反在严格模式。
-```
+```java
 @GlideModule
 public class YourAppGlideModule extends AppGlideModule {
   @Override
@@ -168,7 +168,7 @@ public class YourAppGlideModule extends AppGlideModule {
 5. ResourceEncoder将资源（BitmapResource, DrawableResource）写入Glide的磁盘缓存
 
 注册组件使用Registry类。比如：添加**ModelLoader**可以为自定义模型对象获得一个输入流。
-```
+```java
 @GlideModule
 public class YourAppGlideModule extends AppGlideModule {
   @Override
@@ -214,7 +214,7 @@ Glide v4依赖于两个类AppGlideModule和LibraryGlideModule来配置Glide单�
 应用程序可能依赖于多个库，每个库可能包含一个或多个LibraryGlideModules。在极少数情况下，这些LibraryGlideModule可能定义了冲突的选项，或者包括应用程序希望避免的行为。应用程序可以通过将@Excludes注解添加到其AppGlideModule来解决这些冲突或避免不必要的依赖关系。
 
 例如，如果您依赖于您想要避免的LibraryGlideModule的库，请传入com.example.unwanted.GlideModule：
-```
+```java
 @Excludes（ “com.example.unwanted.GlideModule”）
 @GlideModule
 public final class MyAppGlideModule extends AppGlideModule {}
@@ -222,7 +222,7 @@ public final class MyAppGlideModule extends AppGlideModule {}
 
 您还可以排除多个模块：
 
-```
+```java
 @Excludes（{“com.example.unwanted.GlideModule”，“com.example.conflicing.GlideModule”}）
 @GlideModule
 public final class MyAppGlideModule extends AppGlideModule {}
@@ -235,7 +235,7 @@ public final class MyAppGlideModule extends AppGlideModule {}
 为了保持与Glide v3的GlideModules的向后兼容性，Glide仍然从应用程序和任何包含的库中分析AndroidManifest.xml文件，并将包括清单中列出的任何旧的GlideModules。虽然此功能将在以后的版本中被删除，但我们现在已经保留了行为以减轻转换。
 
 如果您已经迁移到Glide v4 AppGlideModule和LibraryGlideModule，则可以完全禁用清单解析。这样做可以提高Glide的初始启动时间，并避免尝试解析元数据时出现一些潜在的问题。要禁用清单解析，请覆盖AppGlideModule实现中的isManifestParsingEnabled()方法：
-```
+```java
 @GlideModule
 public final class MyAppGlideModule extends AppGlideModule {
   @Override

@@ -3,13 +3,13 @@
 ## 基本用法
 
 使用Glide加载图像很容易，通常情况下只需要一行代码：
-```
+```java
 Glide.with(fragment)
     .load(myUrl)
     .into(imageView);
 ```
 取消您不再需要的负载也很简单：
-```
+```java
 Glide.with(fragment).clear(imageView);
 ```
 尽管清除不再需要的负载是好的做法，但您不需要这样做。事实上，当您通过[Glide.with()](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/Glide.html#with-android.app.Fragment-)方法传入的Activity或者Fragment被销毁时，Glide将自动清除负载并且回收负载使用的任何资源。
@@ -17,7 +17,7 @@ Glide.with(fragment).clear(imageView);
 ## 应用
 
 应用程序可以添加恰当的注解给[AppGlideModule](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/module/AppGlideModule.html)实现，以生成灵活的API，其中包含大多数选项，包括在集成库中定义的选项。
-```
+```java
 package com.example.myapp;
 
 import com.bumptech.glide.annotation.GlideModule;
@@ -27,7 +27,7 @@ import com.bumptech.glide.module.AppGlideModule;
 public final class MyAppGlideModule extends AppGlideModule {}
 ```
 默认情况下，生成的API会跟您的[AppGlideModule](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/module/AppGlideModule.html)实现在同一包下，类名为GlideApp。使用该API，应用程序可以在所有的负载中用**GlideApp.with()**代替**Glide.with()**。
-```
+```java
 GlideApp.with(fragment)
    .load(myUrl)
    .placeholder(placeholder)
@@ -40,7 +40,7 @@ GlideApp.with(fragment)
 ## ListView和RecyclerView
 
 在ListView或者RecyclerView中加载图像使用相同的加载行，就像加载到单个的View一样。Glide会处理View的复用跟请求的自动取消。
-```
+```java
 @Override
 public void onBindViewHolder(ViewHolder holder, int position) {
     String url = urls.get(position);
@@ -53,7 +53,7 @@ public void onBindViewHolder(ViewHolder holder, int position) {
 您不需要检测您传递的URL是否为空，如果URL为空，Glide会清除这个View或者使用您指定的占位图像，或者回调的图像。
 
 Glide唯一的要求是，对于任何可重用的目标View，您可以复用之前的View加载新的图像或者调用**clare()**API来显示的清除。
-```
+```java
 @Override
 public void onBindViewHolder(ViewHolder holder, int position) {
     if (isImagePosition(position)) {

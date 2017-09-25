@@ -11,7 +11,7 @@ Glide的公开发行版可以通过多种方式访问。
 ### Gradle
 
 如果您使用Gradle，您可以使用Maven Central或者JCenter添加Glide的依赖库。您还需要在支持库中包含依赖关系。
-```
+```gradle
 repositories {
   mavenCentral()
 }
@@ -26,7 +26,7 @@ dependencies {
 ### Maven
 
 如果您使用Maven，您还可以在Glide上添加依赖关系。同样地，您还需要在支持库中包含依赖关系。
-```
+```xml
 <dependency>
   <groupId>com.github.bumptech.glide</groupId>
   <artifactId>glide</artifactId>
@@ -67,7 +67,7 @@ Glide的构建配置需要Jack目前还不支持特性。Jack最近被弃用了�
 #### Kotlin
 
 如果您在Kotlin的实现类中使用Glide的注解，则需要在Glide上添加kapt依赖关系，而不是annotationProcessor依赖关系：
-```
+```gradle
 dependencies {
   kapt 'com.github.bumptech.glide:compiler:4.0.0-RC1'
 }

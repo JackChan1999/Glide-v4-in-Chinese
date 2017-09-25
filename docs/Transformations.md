@@ -15,7 +15,7 @@ Glide中包含了一些内置的转换，包括：
 
 ### 默认转换
 
-```
+```java
 RequestOptions options = new RequestOptions();
 options.centerCrop();
 
@@ -26,7 +26,7 @@ Glide.with(fragment)
 ```
 
 大多数内置的转换还可以静态导入，以便使用灵活的API。例如，您可以使用静态方法应用FitCenter转换：
-```
+```java
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
 Glide.with(fragment)
@@ -36,7 +36,7 @@ Glide.with(fragment)
 ```
 
 如果您使用生成的API，转换方法是链式的，所以更加容易：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .fitCenter()
@@ -52,7 +52,7 @@ GlideApp.with(fragment)
 为了将多重转换应用到单一到负载，请使用MultiTransformation类。
 
 使用生成的API：
-```
+```java
 GlideApp.with(fragment)
   .load(url)
   .transform(new MultiTransformation(new FitCenter(), new YourCustomTransformation())
