@@ -13,7 +13,9 @@ Glide v4通过注解处理器生成一个API，允许应用程序以一个灵活
 ### Java
 
 要使用生成的API，您需要执行两个步骤：
-1. 在Glide的注解处理器上添加依赖关系：
+
+1.在Glide的注解处理器上添加依赖关系：
+
 ```gradle
 repositories {
   mavenCentral()
@@ -26,7 +28,8 @@ dependencies {
 
 有关详细信息，请参阅[下载和设置页面](../docs/Download-Setup.md)。
 
-2. 在应用程序中包含一个[AppGlideModule](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/module/AppGlideModule.html)实现：
+2.在应用程序中包含一个[AppGlideModule](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/module/AppGlideModule.html)实现：
+
 ```java
 package com.example.myapp;
    
@@ -44,15 +47,18 @@ public final class MyAppGlideModule extends AppGlideModule {}
 如果您使用Kotlin，您可以：
 1. 实现如上所示的所有的Glide的注解类（包括：AppGlideModule，LibraryGlideModule和GlideExtension）。
 2. 在Kotlin中实现注解类，需要在Glide中添加kapt依赖关系，而不是annotationProcessor依赖关系：
+
 ```gradle
 dependencies {
   kapt 'com.github.bumptech.glide:compiler:4.0.0-RC1'
 }
 ```
+
 要使用kapt，请参阅[官方文档](https://kotlinlang.org/docs/reference/kapt.html)。
 
 ## 使用生成的API
 默认情况下，生成的API会跟您的[AppGlideModule](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/module/AppGlideModule.html)实现在同一包下，类名为GlideApp。使用该API，应用程序可以在所有的负载中用**GlideApp.with()**代替**Glide.with()**。
+
 ```java
 GlideApp.with(fragment)
    .load(myUrl)
@@ -84,6 +90,7 @@ GlideExtension注解类可以定义两种类型的扩展方法：
 2. 添加新的选项，通常结合Glide的[Option](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/load/Option.html)类使用。
 
 定义选项组，您可以这样写：
+
 ```java
 @GlideExtension
 public class MyAppExtension {
@@ -101,6 +108,7 @@ public class MyAppExtension {
 ```
 
 在[RequestOptions](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/request/RequestOptions.html)的子类中生成一个如下的方法：
+
 ```java
 public class GlideOptions extends RequestOptions {
   
@@ -113,6 +121,7 @@ public class GlideOptions extends RequestOptions {
 ```
 
 您可以在方法包含许多希望添加的参数，只需要保证第一个参数是[RequestOptions](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/request/RequestOptions.html)：
+
 ```java
 @GlideOption
 public static void miniThumb(RequestOptions options, int size) {
@@ -123,6 +132,7 @@ public static void miniThumb(RequestOptions options, int size) {
 ```
 
 附加的参数将作为参数添加到生成方法中：
+
 ```java
 public GlideOptions miniThumb(int size) {
   MyAppExtension.miniThumb(this);
@@ -130,6 +140,7 @@ public GlideOptions miniThumb(int size) {
 ```
 
 接着，您可以使用生成的GlideApp类调用您自定义类型：
+
 ```java
 GlideApp.with(fragment)
    .load(url)
@@ -144,6 +155,7 @@ GlideApp.with(fragment)
 [GlideType](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/annotation/GlideType.html)注解扩展[RequestManager](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/RequestManager.html)的静态方法。GlideType注解的方法允许您添加新类型的支持，包括指定默认选项。
 
 比如，添加对GIF的支持，您可以增加GlideType方法：
+
 ```java
 @GlideExtension
 public class MyAppExtension {
@@ -159,6 +171,7 @@ public class MyAppExtension {
 ```
 
 这样将会产生一个包含如下方法的[RequestManager](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/RequestManager.html)实现。
+
 ```java
 public class GlideRequests extends RequesetManager {
 
@@ -173,10 +186,12 @@ public class GlideRequests extends RequesetManager {
 ```
 
 然后，您可以使用生成的GlideApp类来调用自定义的方法：
+
 ```java
 GlideApp.with(fragment)
   .asGif()
   .load(url)
   .into(imageView);
 ```
-由**GlideType**注解的方法必须将[RequestBuilder<T>](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/RequestBuilder.html)作为第一个参数，<T>是符合GlideType注解提供的类型。注解方法必须定义在[GlideExtension](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/annotation/GlideExtension.html)注解的类中并且要求是静态的，返回类型为void。
+
+由**GlideType**注解的方法必须将[RequestBuilder&lt;T>](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/RequestBuilder.html)作为第一个参数，&lt;T>是符合GlideType注解提供的类型。注解方法必须定义在[GlideExtension](http://bumptech.github.io/glide/javadocs/400/com/bumptech/glide/annotation/GlideExtension.html)注解的类中并且要求是静态的，返回类型为void。
